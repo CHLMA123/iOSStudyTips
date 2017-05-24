@@ -22,6 +22,58 @@
 //    [self ThePinyinofChineseCharacters];
 //    [self setStatusBarBackgroundColor:[UIColor redColor]];
 //    [self modifyTextfield];
+//    [self allSubViewsForView:self.view];
+    
+}
+#pragma mark - 计算文件大小
+//文件大小
+- (long long)fileSizeAtPath:(NSString *)path
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    if ([fileManager fileExistsAtPath:path])
+    {
+        long long size = [fileManager attributesOfItemAtPath:path error:nil].fileSize;
+        return size;
+    }
+    
+    return 0;
+}
+
+//文件夹大小
+- (long long)folderSizeAtPath:(NSString *)path
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    long long folderSize = 0;
+    if ([fileManager fileExistsAtPath:path])
+    {
+        NSArray *childerFiles = [fileManager subpathsAtPath:path];
+        for (NSString *fileName in childerFiles)
+        {
+            NSString *fileAbsolutePath = [path stringByAppendingPathComponent:fileName];
+            if ([fileManager fileExistsAtPath:fileAbsolutePath])
+            {
+                long long size = [fileManager attributesOfItemAtPath:fileAbsolutePath error:nil].fileSize;
+                folderSize += size;
+            }
+        }
+    }
+    
+    return folderSize;
+}
+#pragma mark - 查找一个视图的所有子视图
+- (NSMutableArray *)allSubViewsForView:(UIView *)view {
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:0];
+    for (UIView *subView in view.subviews)
+    {
+        [array addObject:subView];
+        if (subView.subviews.count > 0)
+        {
+            [array addObjectsFromArray:[self allSubViewsForView:subView]];
+        }
+    }
+    NSLog(@"### %@ ###", array);
+    return array;
 }
 #pragma mark - 修改UITextField中Placeholder的文字颜色
 - (void)modifyTextfield {
