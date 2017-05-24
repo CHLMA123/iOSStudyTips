@@ -25,6 +25,59 @@
 //    [self allSubViewsForView:self.view];
     
 }
+#pragma mark - iOS9 crash animateWithDuration
+/*
+ 在iOS9 中，如果进行animateWithDuration 时，view被release 那么会引起crash。
+ */
+- (void)animateUIView {
+//    // 会crash
+//    [UIView animateWithDuration:0.25f animations:^{
+//        self.view.frame = CGRectMake(10, 20, 100, 19);
+//    } completion:^(BOOL finished) {
+//        if (finished) {
+//            [self.view removeFromSuperview];
+//        }
+//    }];
+    // 不会Crash
+//    [UIView animateWithDuration:0.25f
+//                          delay:0
+//         usingSpringWithDamping:1.0
+//          initialSpringVelocity:1.0 options:UIViewAnimationOptionCurveLinear
+//                     animations:^{
+//                         self.frame = selfFrame;
+//                     } completion:^(BOOL finished) {
+//                         [super removeFromSuperview];
+//                     }
+//     ];
+}
+#pragma mark - NSDictionary 转 NSString
+- (void)convertNSDictonaryToNSString {
+    // 将dictionary 转化为 NSData， data 转化为 string .
+    NSDictionary *parametersDic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                   @"providerStr", @"KEY_LOGIN_PROVIDER",
+                                   @"token", @"KEY_TOKEN",
+                                   @"response", @"KEY_RESPONSE",
+                                   nil];
+    
+    NSData *jsonData = (parametersDic == nil ? nil : [NSJSONSerialization dataWithJSONObject:parametersDic options:0 error:nil]);
+    NSString *requestBody = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+}
+#pragma mark - TableView 
+// Header View 跟随Tableview 滚动
+// UITableViewCell
+- (void)customUITableViewCell {
+    /**
+     当tableview的类型为 plain的时候，header View 就会停留在最上面。
+     当类型为 group的时候，header view 就会跟随tableview 一起滚动了。
+     */
+    /**
+     UITableViewCell 属性 NSInteger indentationLevel 的使用， 对cell设置 indentationLevel的值，可以将cell 分级别。
+     还有 CGFloat indentationWidth; 属性，设置缩进的宽度。
+     总缩进的宽度: indentationLevel * indentationWidth
+     */
+    
+}
 #pragma mark - navigationBar根据滑动距离的渐变色实现
 //第一种
 //- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
