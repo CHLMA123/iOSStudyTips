@@ -20,9 +20,26 @@
 //    [self removeNSUserDefaults];
 //    enumerateFonts();
 //    [self ThePinyinofChineseCharacters];
-    [self setStatusBarBackgroundColor:[UIColor redColor]];
+//    [self setStatusBarBackgroundColor:[UIColor redColor]];
+//    [self modifyTextfield];
 }
 
+#pragma mark - 修改UITextField中Placeholder的文字颜色
+- (void)modifyTextfield {
+    UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(10, 64, SCREEN_WIDTH - 20, 20)];
+    [textField setPlaceholder:@"Placeholder的文字颜色"];
+    [textField setValue:[UIColor redColor] forKeyPath:@"_placeholderLabel.textColor"];
+    [self.view addSubview:textField];
+}
+#pragma mark - NSArray 快速求总和 最大值 最小值 和 平均值
+- (void)arraySum {
+    NSArray *array = [NSArray arrayWithObjects:@"2.0", @"2.3", @"3.0", @"4.0", @"10", nil];
+    CGFloat sum = [[array valueForKeyPath:@"@sum.floatValue"] floatValue];
+    CGFloat avg = [[array valueForKeyPath:@"@avg.floatValue"] floatValue];
+    CGFloat max =[[array valueForKeyPath:@"@max.floatValue"] floatValue];
+    CGFloat min =[[array valueForKeyPath:@"@min.floatValue"] floatValue];
+    NSLog(@"%f\n%f\n%f\n%f",sum,avg,max,min);
+}
 #pragma mark - 手动更改iOS状态栏的颜色
 - (void)setStatusBarBackgroundColor:(UIColor *)color {
     UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
