@@ -25,7 +25,38 @@
 //    [self allSubViewsForView:self.view];
     
 }
-
+#pragma mark - navigationBar根据滑动距离的渐变色实现
+//第一种
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    CGFloat offsetToShow = 200.0;//滑动多少就完全显示
+//    CGFloat alpha = 1 - (offsetToShow - scrollView.contentOffset.y) / offsetToShow;
+//    [[self.navigationController.navigationBar subviews] objectAtIndex:0].alpha = alpha;
+//}
+//第二种
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat offsetToShow = 200.0;
+    CGFloat alpha = 1 - (offsetToShow - scrollView.contentOffset.y) / offsetToShow;
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    [self.navigationController.navigationBar setBackgroundImage:[self imageWithColor:[[UIColor orangeColor]colorWithAlphaComponent:alpha]] forBarMetrics:UIBarMetricsDefault];
+}
+//生成一张纯色的图片
+- (UIImage *)imageWithColor:(UIColor *)color {
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return theImage;
+}
+#pragma mark - 屏蔽触发事件，2秒后取消屏蔽
+- (void)ignoringEvents {
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+    });
+}
 #pragma mark - dispatch_group的使用
 - (void)dispatch_groupUser {
     dispatch_group_t dispatchGroup = dispatch_group_create();
@@ -95,11 +126,12 @@
     NSLog(@"### %@ ###", array);
     return array;
 }
-#pragma mark - 修改UITextField中Placeholder的文字颜色
+#pragma mark - 修改UITextField中Placeholder的字体颜色、大小
 - (void)modifyTextfield {
     UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(10, 64, SCREEN_WIDTH - 20, 20)];
     [textField setPlaceholder:@"Placeholder的文字颜色"];
     [textField setValue:[UIColor redColor] forKeyPath:@"_placeholderLabel.textColor"];
+    [textField setValue:[UIFont boldSystemFontOfSize:16] forKeyPath:@"_placeholderLabel.font"];
     [self.view addSubview:textField];
 }
 #pragma mark - NSArray 快速求总和 最大值 最小值 和 平均值
