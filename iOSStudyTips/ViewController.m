@@ -23,7 +23,6 @@
 //    [self setStatusBarBackgroundColor:[UIColor redColor]];
 //    [self modifyTextfield];
 }
-
 #pragma mark - 修改UITextField中Placeholder的文字颜色
 - (void)modifyTextfield {
     UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(10, 64, SCREEN_WIDTH - 20, 20)];

@@ -14,6 +14,7 @@
 		3657F0D01ED5B15300A79DFB /* iOSStudyTips.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3657F0CE1ED5B15300A79DFB /* iOSStudyTips.xcdatamodeld */; };
 		3657F0D21ED5B15300A79DFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3657F0D11ED5B15300A79DFB /* Assets.xcassets */; };
 		3657F0D51ED5B15300A79DFB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3657F0D31ED5B15300A79DFB /* LaunchScreen.storyboard */; };
+		3657F0F31ED5C29A00A79DFB /* UIImage+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 3657F0F21ED5C29A00A79DFB /* UIImage+Extend.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,8 @@
 		3657F0EB1ED5B24900A79DFB /* NotificationMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationMacros.h; sourceTree = "<group>"; };
 		3657F0EC1ED5B24900A79DFB /* PathMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathMacros.h; sourceTree = "<group>"; };
 		3657F0ED1ED5B24900A79DFB /* UtilsMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilsMacros.h; sourceTree = "<group>"; };
+		3657F0F11ED5C29A00A79DFB /* UIImage+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extend.h"; sourceTree = "<group>"; };
+		3657F0F21ED5C29A00A79DFB /* UIImage+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extend.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +90,8 @@
 			isa = PBXGroup;
 			children = (
 				3657F0C31ED5B15300A79DFB /* main.m */,
+				3657F0F11ED5C29A00A79DFB /* UIImage+Extend.h */,
+				3657F0F21ED5C29A00A79DFB /* UIImage+Extend.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -182,6 +187,7 @@
 				3657F0D01ED5B15300A79DFB /* iOSStudyTips.xcdatamodeld in Sources */,
 				3657F0C71ED5B15300A79DFB /* AppDelegate.m in Sources */,
 				3657F0C41ED5B15300A79DFB /* main.m in Sources */,
+				3657F0F31ED5C29A00A79DFB /* UIImage+Extend.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +355,7 @@
 				3657F0DB1ED5B15300A79DFB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
