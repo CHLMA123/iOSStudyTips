@@ -17,10 +17,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    [self removeNSUserDefaults];
+//    [self removeNSUserDefaults];
+//    enumerateFonts();
 }
-
-// 删除NSUserDefaults所有记录
+#pragma mark - 打印系统所有已注册的字体名称
+void enumerateFonts() {
+    for(NSString *familyName in [UIFont familyNames])
+    {
+        NSLog(@"%@",familyName);
+        NSArray *fontNames = [UIFont fontNamesForFamilyName:familyName];
+        for(NSString *fontName in fontNames)
+        {
+            NSLog(@"\t|- %@",fontName);
+        }
+    }
+}
+#pragma mark - 删除NSUserDefaults所有记录
 - (void)removeNSUserDefaults {
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
