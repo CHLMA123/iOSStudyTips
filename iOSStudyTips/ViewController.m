@@ -21,6 +21,12 @@
 //    enumerateFonts();
     
 }
+
+#pragma mark - 禁止锁屏
+- (void)LockTheScreen {
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+}
 #pragma mark - 字符串反转
 - (NSString *)reverseWordsInString:(NSString *)str {
     NSMutableString *newString = [[NSMutableString alloc] initWithCapacity:str.length];
