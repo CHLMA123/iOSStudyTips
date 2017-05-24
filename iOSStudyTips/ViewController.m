@@ -19,6 +19,26 @@
     // Do any additional setup after loading the view, typically from a nib.
 //    [self removeNSUserDefaults];
 //    enumerateFonts();
+    
+}
+#pragma mark - 字符串反转
+- (NSString *)reverseWordsInString:(NSString *)str {
+    NSMutableString *newString = [[NSMutableString alloc] initWithCapacity:str.length];
+    for (NSInteger i = str.length - 1; i >= 0 ; i --)
+    {
+        unichar ch = [str characterAtIndex:i];
+        [newString appendFormat:@"%c", ch];
+    }
+    return newString;
+}
+
+//第二种：
+- (NSString*)reverseWordsInString2:(NSString*)str {
+    NSMutableString *reverString = [NSMutableString stringWithCapacity:str.length];
+    [str enumerateSubstringsInRange:NSMakeRange(0, str.length) options:NSStringEnumerationReverse | NSStringEnumerationByComposedCharacterSequences  usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+        [reverString appendString:substring];
+    }];
+    return reverString;
 }
 #pragma mark - 打印系统所有已注册的字体名称
 void enumerateFonts() {
