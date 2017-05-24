@@ -25,6 +25,8 @@
 //    [self allSubViewsForView:self.view];
     
 }
+
+
 #pragma mark - 计算文件大小
 //文件大小
 - (long long)fileSizeAtPath:(NSString *)path
