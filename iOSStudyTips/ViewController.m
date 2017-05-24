@@ -20,6 +20,15 @@
 //    [self removeNSUserDefaults];
 //    enumerateFonts();
 //    [self ThePinyinofChineseCharacters];
+    [self setStatusBarBackgroundColor:[UIColor redColor]];
+}
+
+#pragma mark - 手动更改iOS状态栏的颜色
+- (void)setStatusBarBackgroundColor:(UIColor *)color {
+    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+    if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
+        statusBar.backgroundColor = color;
+    }
 }
 #pragma mark - iOS 获取汉字的拼音
 - (void)ThePinyinofChineseCharacters {
