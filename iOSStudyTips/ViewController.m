@@ -22,6 +22,13 @@
     
 }
 
+
+#pragma mark - 字符串按多个符号分割
+- (void)StringSegmentation {
+    NSString *str = @"abc,def.yuuw";
+    NSCharacterSet *sets = [NSCharacterSet characterSetWithCharactersInString:@",."];
+    NSLog(@"%@",[str componentsSeparatedByCharactersInSet:sets]);
+}
 #pragma mark - 禁止锁屏
 - (void)LockTheScreen {
     [UIApplication sharedApplication].idleTimerDisabled = YES;
