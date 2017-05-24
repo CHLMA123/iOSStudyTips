@@ -26,7 +26,25 @@
     
 }
 
-
+#pragma mark - dispatch_group的使用
+- (void)dispatch_groupUser {
+    dispatch_group_t dispatchGroup = dispatch_group_create();
+    dispatch_group_enter(dispatchGroup);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSLog(@"第一个请求完成");
+        dispatch_group_leave(dispatchGroup);
+    });
+    
+    dispatch_group_enter(dispatchGroup);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSLog(@"第二个请求完成");
+        dispatch_group_leave(dispatchGroup);
+    });
+    
+    dispatch_group_notify(dispatchGroup, dispatch_get_main_queue(), ^(){
+        NSLog(@"请求完成");
+    });
+}
 #pragma mark - 计算文件大小
 //文件大小
 - (long long)fileSizeAtPath:(NSString *)path
