@@ -17,8 +17,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    [self removeNSUserDefaults];
 }
 
+// 删除NSUserDefaults所有记录
+- (void)removeNSUserDefaults {
+
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@"111" forKey:@"mine"];
+    [defaults synchronize];
+    NSLog(@"### %@ ###",[defaults objectForKey:@"mine"]);
+    //方法一
+//    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+//    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    //方法二
+    [self resetDefaults];
+    NSLog(@"### %@ ###",[defaults objectForKey:@"mine"]);
+}
+
+- (void)resetDefaults {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *dict = [defaults dictionaryRepresentation];
+    for (id key in [dict allKeys]) {
+        [defaults removeObjectForKey:key];
+    }
+    [defaults synchronize];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
