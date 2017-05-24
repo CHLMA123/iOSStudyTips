@@ -19,10 +19,30 @@
     // Do any additional setup after loading the view, typically from a nib.
 //    [self removeNSUserDefaults];
 //    enumerateFonts();
-    
+//    [self ThePinyinofChineseCharacters];
 }
-
-
+#pragma mark - iOS 获取汉字的拼音
+- (void)ThePinyinofChineseCharacters {
+    NSString *str = [self transform:@"学习"];
+    NSLog(@"### %@ ###", str);
+}
+- (NSString *)transform:(NSString *)chinese
+{
+    //将NSString装换成NSMutableString
+    NSMutableString *pinyin = [chinese mutableCopy];
+    //将汉字转换为拼音(带音标)
+    CFStringTransform((__bridge CFMutableStringRef)pinyin, NULL, kCFStringTransformMandarinLatin, NO);
+    NSLog(@"%@", pinyin);
+    //去掉拼音的音标
+    CFStringTransform((__bridge CFMutableStringRef)pinyin, NULL, kCFStringTransformStripCombiningMarks, NO);
+    NSLog(@"%@", pinyin);
+    //返回最近结果
+    return pinyin;
+}
+#pragma mark - iOS跳转到App Store下载应用评分
+- (void)ApplicationScore {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=APPID"] options:@{@"1":@"1"} completionHandler:nil];
+}
 #pragma mark - 字符串按多个符号分割
 - (void)StringSegmentation {
     NSString *str = @"abc,def.yuuw";
